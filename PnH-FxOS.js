@@ -3,17 +3,17 @@
  * Replace pnh_manifest with the URL of your Plug-n-Hack manifest.
  */
 
-var pnh_manifest = 'http://192.168.0.14:8080/manifest';
-
-var mf_request = new XMLHttpRequest();
-mf_request.open('GET', pnh_manifest, true);
+const PNH_MANIFEST = 'http://192.168.0.14:8080/manifest';
 
 let Ci = Components.interfaces;
-
+let Cc = Components.classes;
 let nsX509CertDB = "@mozilla.org/security/x509certdb;1";
 let nsIX509Cert = Ci.nsIX509Cert;
 let nsIX509CertDB = Ci.nsIX509CertDB;
 let certdb = Cc[nsX509CertDB].getService(nsIX509CertDB);
+
+var mf_request = new XMLHttpRequest();
+mf_request.open('GET', PNH_MANIFEST, true);
 
 mf_request.onload = function() {
   var config = null;
@@ -41,8 +41,8 @@ mf_request.onload = function() {
       console.log('oops!');
       console.log(e.status);
     }
-    cert_req.send(null)
+    cert_req.send(null);
   }
 };
 
-mf_request.send(null)
+mf_request.send(null);
